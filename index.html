@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IPTV Premium - Assine Agora</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="logo.jpeg" alt="Logo" class="logo-img" />
+        <span class="logo-text"><span>IPTV</span>Premium</span>
+      </div>
+      <nav id="mainNav">
+        <a href="#inicio" onclick="closeMenu()">Início</a>
+        <a href="#planos" onclick="closeMenu()">Planos</a>
+        <a href="#como-ativar" onclick="closeMenu()">Como Ativar</a>
+        <a href="#download" onclick="closeMenu()">Download</a>
+        <a href="#depoimentos" onclick="closeMenu()">Avaliações</a>
+        <a href="#faq" onclick="closeMenu()">FAQ</a>
+        <a href="#contato" onclick="closeMenu()">Contato</a>
+      </nav>
+      <button class="nav-close" id="navClose" onclick="closeMenu()">✕</button>
+      <button class="menu-toggle" onclick="openMenu()">☰</button>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Carrinho <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="container hero-inner">
+      <div class="hero-text reveal-left">
+        <div class="badge">🔴 Ativação em até 24h via WhatsApp e E-mail</div>
+        <h1>Ative sua Assinatura IPTV <span>Agora Mesmo</span></h1>
+        <p>Receba seu código de acesso via <strong>WhatsApp ou E-mail</strong> imediatamente após o pagamento. Assista canais, filmes e séries!</p>
+        <div class="hero-btns">
+          <a href="#planos" class="btn-primary">🛒 Ver Planos</a>
+          <a href="https://wa.me/5583994155465" target="_blank" class="btn-outline">📲 Falar no WhatsApp</a>
+        </div>
+        <div class="hero-badges">
+          <div class="badge-item">⚡ Envio Imediato</div>
+          <div class="badge-item">📱 2 Telas simultâneas</div>
+          <div class="badge-item">🔒 Pagamento Seguro</div>
+        </div>
+      </div>
+      <div class="hero-card reveal-right">
+        <div class="hero-card-inner">
+          <h3>ATIVAR IPTV</h3>
+          <p class="highlight">EM 1 MIN</p>
+          <p>SEM ERRO!</p>
+          <ul>
+            <li>✅ +500 Canais</li>
+            <li>✅ HD, FHD e 4K</li>
+            <li>✅ Filmes e Séries</li>
+            <li>✅ TV Box, Celular e Smart TV</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVISO -->
+  <div class="aviso container">
+    ⚠️ <strong>IMPORTANTE:</strong> Antes de ativar seu código, vincule um e-mail ou telefone no aplicativo em <strong>Perfil &gt; Segurança</strong>.
+  </div>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="container">
+      <h2 class="video-titulo">Veja como funciona</h2>
+      <p class="subtitle">Assista ao vídeo e descubra tudo que você tem acesso com a assinatura IPTV.</p>
+      <div class="video-wrapper" id="videoWrapper">
+        <video id="meuVideo" preload="metadata" playsinline onclick="togglePlay()">
+          <source src="video.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+
+        <!-- Overlay de play inicial -->
+        <div class="video-overlay" id="videoOverlay" onclick="playVideo()">
+          <div class="play-btn">▶</div>
+        </div>
+
+        <!-- Barra de controles estilo YouTube -->
+        <div class="yt-controls" id="ytControls">
+          <!-- Barra de progresso -->
+          <div class="yt-progress-bar" onclick="seekVideo(event)" id="progressBar">
+            <div class="yt-progress-fill" id="progressFill"></div>
+            <div class="yt-thumb" id="progressThumb"></div>
+          </div>
+
+          <!-- Botões -->
+          <div class="yt-btns">
+            <div class="yt-left">
+              <button class="yt-btn" id="btnPlay" onclick="togglePlay()" title="Play/Pausar">
+                <svg id="iconPlay" viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="iconPause" viewBox="0 0 24 24" fill="white" width="22" height="22" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              <button class="yt-btn" id="btnMute" onclick="toggleMute()" title="Mudo/Som">
+                <svg id="iconVol" viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                <svg id="iconMute" viewBox="0 0 24 24" fill="white" width="22" height="22" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+              </button>
+              <span class="yt-time" id="ytTime">0:00 / 0:00</span>
+            </div>
+            <div class="yt-right">
+              <button class="yt-btn" onclick="toggleFullscreen()" title="Tela cheia">
+                <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="planos" id="planos">
+    <div class="container">
+      <h2>Planos de Assinatura: Mensal e Anual</h2>
+      <p class="subtitle">Escolha o melhor plano com o <strong>melhor custo-benefício</strong>. Suporte 24h.</p>
+
+      <div class="cards">
+
+        <!-- PLANO MENSAL -->
+        <div class="card reveal">
+          <div class="card-header">
+            <div class="card-icon">📦</div>
+            <div>
+              <h3>IPTV Mensal (30 dias)</h3>
+              <small>Assinatura 30 dias</small>
+            </div>
+          </div>
+          <div class="preco">R$ 25,00</div>
+          <p class="preco-desc">Acesso VIP Imediato — Ideal para testar a qualidade.</p>
+          <ul class="features">
+            <li>✅ Acesso VIP por 30 dias</li>
+            <li>✅ Liberação instantânea via WhatsApp e E-mail</li>
+            <li>✅ Grade completa: +500 Canais, Filmes e Séries</li>
+            <li>✅ Qualidade máxima: HD, FHD e 4K</li>
+            <li>✅ Multitela: até 2 dispositivos simultâneos</li>
+            <li>✅ TV Box, Celular e Android TV</li>
+          </ul>
+          <button class="btn-primary" onclick="addToCart('IPTV Mensal (30 dias)', 25.00)">🛒 Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- PLANO ANUAL -->
+        <div class="card destaque reveal">
+          <div class="tag-destaque">MELHOR OFERTA</div>
+          <div class="card-header">
+            <div class="card-icon">🏆</div>
+            <div>
+              <h3>IPTV Anual (365 dias)</h3>
+              <small>Assinatura 365 dias</small>
+            </div>
+          </div>
+          <div class="preco">R$ 170,00</div>
+          <p class="preco-desc">O Melhor Custo-Benefício. Menos de R$ 0,50 por dia!</p>
+          <ul class="features">
+            <li>✅ Acesso VIP por 365 dias</li>
+            <li>✅ Código enviado na hora via WhatsApp/E-mail</li>
+            <li>✅ Equivalente a ~R$14/mês — economize R$130</li>
+            <li>✅ Canais ao vivo HD, FHD e 4K</li>
+            <li>✅ Filmes e séries atualizados + 2 telas</li>
+            <li>✅ Compatível com TV Box, celular e Smart TV</li>
+          </ul>
+          <button class="btn-primary" onclick="addToCart('IPTV Anual (365 dias)', 170.00)">🛒 Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- PLANO SEMESTRAL -->
+        <div class="card reveal">
+          <div class="card-header">
+            <div class="card-icon">📅</div>
+            <div>
+              <h3>IPTV Trimestral (90 dias)</h3>
+              <small>Assinatura 90 dias</small>
+            </div>
+          </div>
+          <div class="preco">R$ 70,00</div>
+          <p class="preco-desc">Ótimo custo-benefício para 3 meses de streaming.</p>
+          <ul class="features">
+            <li>✅ Acesso VIP por 90 dias</li>
+            <li>✅ Liberação instantânea via WhatsApp e E-mail</li>
+            <li>✅ +500 Canais, Filmes e Séries</li>
+            <li>✅ HD, FHD e 4K</li>
+            <li>✅ Até 2 dispositivos simultâneos</li>
+            <li>✅ TV Box, Celular e Android TV</li>
+          </ul>
+          <button class="btn-primary" onclick="addToCart('IPTV Semestral (90 dias)', 70.00)">🛒 Adicionar ao Carrinho</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO ATIVAR -->
+  <section class="como-ativar" id="como-ativar">
+    <div class="container">
+      <h2>Como Ativar sua Assinatura IPTV <span>(Passo a Passo)</span></h2>
+      <p class="subtitle">Em menos de 1 minuto você faz sua recarga oficial e recebe o <strong>Código VIP</strong> no seu WhatsApp ou E-mail.</p>
+      <div class="passos">
+        <div class="passo reveal">
+          <div class="passo-num">1</div>
+          <h4>Escolha seu Plano IPTV</h4>
+          <p>Selecione o plano Mensal ou aproveite o desconto exclusivo do plano Anual. Clique no botão de compra para prosseguir.</p>
+        </div>
+        <div class="passo reveal">
+          <div class="passo-num">2</div>
+          <h4>Pagamento via PIX</h4>
+          <p>Finalize o pedido utilizando o PIX. O sistema identifica seu pagamento na hora, garantindo que você não perca nem um minuto da sua programação.</p>
+        </div>
+        <div class="passo reveal">
+          <div class="passo-num">3</div>
+          <h4>Código IPTV na Hora</h4>
+          <p>Assim que aprovado, seu Código de Ativação é enviado automaticamente para o seu WhatsApp e E-mail. Sem espera, sem burocracia.</p>
+        </div>
+        <div class="passo reveal">
+          <div class="passo-num">4</div>
+          <h4>Ative sua Assinatura IPTV</h4>
+          <p>Abra o app, insira o código em sua conta (lembre-se de vincular seu e-mail em Perfil &gt; Segurança) e pronto! Sua grade completa está liberada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="download" id="download">
+    <div class="container">
+      <h2>Download: APK Oficial e Instalação Passo a Passo</h2>
+      <p class="subtitle">Baixe a versão atualizada do APK e instale em qualquer dispositivo Android em segundos.</p>
+      <div class="download-cards">
+        <div class="dl-card reveal">
+          <div class="dl-icon">📺</div>
+          <h3>TV Box &amp; Sticks</h3>
+          <p>O APK para TV Box é otimizado para Mi Stick, Fire Stick e aparelhos similares.</p>
+          <a href="https://aftv.news/8082765" target="_blank" class="btn-primary">Baixar para TV Box</a>
+        </div>
+        <div class="dl-card reveal">
+          <div class="dl-icon">📱</div>
+          <h3>Celular Android</h3>
+          <p>Leve sua Assinatura IPTV para onde quiser. Acesse todos os canais e filmes na palma da sua mão com o app.</p>
+          <a href="https://aftv.news/8082765" target="_blank" class="btn-primary">Baixar para Mobile</a>
+        </div>
+        <div class="dl-card reveal">
+          <div class="dl-icon">🖥️</div>
+          <h3>Smart TV Android</h3>
+          <p>Assista com a máxima resolução. Compatível com as principais marcas de TV Android.</p>
+          <a href="https://aftv.news/8082765" target="_blank" class="btn-primary">Baixar para Smart TV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="container">
+      <h2>DEPOIMENTOS</h2>
+      <p class="subtitle">Mais de 18 mil usuários já garantiram sua Assinatura IPTV conosco este mês.</p>
+      <div class="dep-cards">
+        <div class="dep-card reveal">
+          <div class="dep-avatar">👤</div>
+          <strong>Fernando Lima</strong>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Estava com medo de não saber instalar no meu Fire Stick, mas o suporte me chamou no WhatsApp e em 2 minutos eu já estava assistindo. O código VIP chegou na hora!"</p>
+        </div>
+        <div class="dep-card reveal">
+          <div class="dep-avatar">👤</div>
+          <strong>Marcos Souza</strong>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Troquei minha mensalidade de R$ 250 por essa recarga anual. A qualidade é impressionante e não trava nada. Melhor custo-benefício que já encontrei."</p>
+        </div>
+        <div class="dep-card reveal">
+          <div class="dep-avatar">👤</div>
+          <strong>Ricardo Alves</strong>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Paguei o pix e o código caiu no meu email antes mesmo de eu fechar o banco. Site confiável para fazer a assinatura IPTV oficial. Recomendo!"</p>
+        </div>
+        <div class="dep-card reveal">
+          <div class="dep-avatar">👤</div>
+          <strong>Juliana Meireles</strong>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Coloquei no quarto das crianças e na sala. Os canais infantis e de filmes são completos. Uso a recarga há meses e nunca tive sinal fora do ar. Nota 10!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <h2 class="faq-titulo">Perguntas Frequentes</h2>
+      <p class="subtitle">Tire suas dúvidas antes de assinar.</p>
+      <div class="faq-list">
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Como recebo meu código após o pagamento?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Assim que o pagamento via PIX for confirmado, o código de ativação é enviado automaticamente para o seu <strong>WhatsApp e E-mail</strong> em menos de 1 minuto.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Em quais dispositivos funciona?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Funciona em <strong>TV Box, Fire Stick, Mi Stick, Smart TV Android, celular Android e tablet</strong>. Basta baixar o APK e inserir o código.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Posso usar em mais de um dispositivo ao mesmo tempo?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim! Todos os planos permitem até <strong>2 telas simultâneas</strong>, ou seja, você pode assistir em 2 dispositivos ao mesmo tempo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>O que acontece quando meu plano vencer?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Seu acesso é pausado automaticamente. Basta fazer uma nova recarga e inserir o novo código para reativar em segundos, sem perder seu histórico.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>A qualidade de imagem é boa?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim! Oferecemos canais em <strong>HD, Full HD e 4K</strong> dependendo da sua conexão de internet. Recomendamos no mínimo 10 Mbps para melhor experiência.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Tem suporte caso eu tenha dificuldade?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim! Nosso suporte funciona <strong>24 horas por dia</strong> via WhatsApp. Respondemos em minutos e ajudamos você a instalar e ativar sem complicação.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="container contato-inner">
+      <h2>Precisa de ajuda?</h2>
+      <p>Fale diretamente com nossa equipe pelo WhatsApp. Respondemos em minutos!</p>
+      <a href="https://wa.me/5583994155465?text=Olá! Quero saber mais sobre os planos IPTV." target="_blank" class="btn-whatsapp">
+        💬 Falar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 IPTV Premium. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- CARRINHO LATERAL -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Seu Carrinho</h3>
+      <button onclick="toggleCart()" class="close-btn">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Nenhum item no carrinho.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        Total: <strong id="cartTotal">R$ 0,00</strong>
+      </div>
+      <button class="btn-whatsapp" onclick="finalizarNoWhatsApp()" id="btnFinalizar" disabled>
+        💬 Finalizar pelo WhatsApp
+      </button>
+      <button class="btn-limpar" onclick="limparCarrinho()">🗑️ Limpar Carrinho</button>
+    </div>
+  </div>
+
+  <!-- BOTÕES FLUTUANTES -->
+  <a href="https://wa.me/5583994155465?text=Olá! Quero saber mais sobre os planos IPTV." target="_blank" class="fab-whatsapp" title="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.17 1.58 5.943L.057 23.57a.75.75 0 00.916.916l5.63-1.523A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.964-1.362l-.355-.212-3.684.996.976-3.568-.232-.368A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+  </a>
+  <button class="fab-top" id="fabTop" onclick="scrollToTop()" title="Voltar ao topo">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
